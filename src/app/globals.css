@@ -1,0 +1,386 @@
+/* CRITICAL STYLES - Load first to prevent FOUC */
+/* Base layout and critical UI elements */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Prevent layout shift during load */
+* {
+  box-sizing: border-box;
+}
+
+/* Critical animation for smooth appearance */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hide content until styles are ready */
+.style-loading {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.style-loaded {
+  opacity: 1;
+}
+
+/* Ensure proper layout structure */
+.main-content {
+  flex: 1;
+  overflow: auto;
+  transition: margin-left 0.3s ease;
+}
+
+/* Preload Ant Design base styles */
+.ant-layout {
+  display: flex;
+  flex: auto;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.ant-layout-sider {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+}
+
+.ant-menu {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1.5715;
+  list-style: none;
+}
+
+.ant-drawer {
+  position: fixed;
+  z-index: 1000;
+}
+
+/* Import Tailwind CSS */
+@import "tailwindcss";
+
+/* Import Ant Design CSS */
+@import 'antd/dist/reset.css';
+
+/* Theme Variables */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+  transition: opacity 0.3s ease;
+}
+
+.ant-table-row-even {
+  background-color: #fafbfc !important;
+}
+
+.ant-table-row-odd {
+  background-color: white !important;
+}
+
+.ant-table-row:hover {
+  background-color: #f0f7ff !important;
+  transition: background-color 0.3s ease !important;
+}
+
+.ant-table-thead > tr > th {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  border-bottom: none !important;
+}
+
+.ant-table-thead > tr > th:hover {
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%) !important;
+}
+
+.ant-table-wrapper {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.ant-btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  border: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.ant-btn-primary:hover {
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4) !important;
+}
+
+.ant-btn-primary:active {
+  transform: translateY(0) !important;
+}
+
+.ant-input-affix-wrapper {
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+}
+
+.ant-input-affix-wrapper:focus-within {
+  border-color: #667eea !important;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2) !important;
+}
+
+.ant-modal-content {
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+
+.ant-modal-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  border-bottom: none !important;
+  padding: 20px 24px !important;
+}
+
+.ant-modal-title {
+  color: white !important;
+  font-weight: 600 !important;
+  font-size: 18px !important;
+}
+
+.ant-modal-body {
+  padding: 24px !important;
+}
+
+.ant-modal-footer {
+  border-top: 1px solid #f0f0f0 !important;
+  padding: 16px 24px !important;
+}
+
+/* add this CSS */
+.ant-modal .ant-modal-close {
+  margin-top: 24px !important;
+  margin-right: 24px !important;
+  border-radius: '50%';
+  z-index: 2;
+}
+
+
+.ant-menu-item-selected {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  border-radius: 8px !important;
+  margin: 4px 8px !important;
+  width: calc(100% - 16px) !important;
+}
+
+.ant-menu-item-selected::after {
+  display: none !important;
+}
+
+.ant-menu-item:hover {
+  background-color: rgba(102, 126, 234, 0.1) !important;
+  border-radius: 8px !important;
+  margin: 4px 8px !important;
+  width: calc(100% - 16px) !important;
+}
+
+.ant-menu-item:hover::after {
+  display: none !important;
+}
+
+.ant-menu-vertical {
+  border-right: none !important;
+}
+
+.ant-drawer-content {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+.ant-drawer-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  border-bottom: none !important;
+}
+
+.ant-drawer-title {
+  color: white !important;
+  font-weight: 600 !important;
+}
+
+.ant-drawer-close {
+  color: white !important;
+}
+
+.ant-drawer-close:hover {
+  color: #f0f0f0 !important;
+}
+
+.ant-popover-content {
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+.ant-popover-inner {
+  border-radius: 12px !important;
+}
+
+.ant-popconfirm-title {
+  font-weight: 600 !important;
+  color: #1a1a1a !important;
+}
+
+.ant-popconfirm-buttons button {
+  border-radius: 8px !important;
+  height: 36px !important;
+  font-weight: 500 !important;
+}
+
+.ant-message-notice-content {
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+}
+
+.ant-message-success {
+  background-color: #f6ffed !important;
+  border: 1px solid #b7eb8f !important;
+}
+
+.ant-message-error {
+  background-color: #fff2f0 !important;
+  border: 1px solid #ffccc7 !important;
+}
+
+@media (max-width: 767px) {
+  .main-content {
+    margin-left: 0 !important;
+    padding: 12px !important;
+  }
+  
+  /* Hide desktop sidebar on mobile */
+  [style*="position: fixed"] {
+    display: none !important;
+  }
+  
+  .ant-layout-sider {
+    position: fixed !important;
+    z-index: 1000 !important;
+    height: 100vh !important;
+  }
+  
+  .ant-layout-sider-collapsed {
+    transform: translateX(-100%) !important;
+  }
+  
+  .ant-table-wrapper {
+    overflow-x: auto !important;
+  }
+  
+  .ant-table {
+    min-width: 600px !important;
+  }
+  
+  .ant-modal {
+    max-width: 95vw !important;
+    margin: 10px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 8px !important;
+  }
+  
+  .ant-card {
+    margin-bottom: 12px !important;
+  }
+  
+  .ant-btn {
+    margin-bottom: 8px !important;
+    width: 100% !important;
+  }
+  
+  .ant-input-search {
+    margin-bottom: 12px !important;
+  }
+}
+  .ant-table-wrapper {
+    border-radius: 8px !important;
+  }
+  
+  .ant-modal-content {
+    border-radius: 12px !important;
+  }
+  
+  .ant-modal-body {
+    padding: 16px !important;
+  }
+  
+  .ant-table-thead > tr > th {
+    padding: 12px 8px !important;
+    font-size: 12px !important;
+  }
+  
+  .ant-table-tbody > tr > td {
+    padding: 12px 8px !important;
+    font-size: 12px !important;
+  }
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
