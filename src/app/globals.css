@@ -193,9 +193,8 @@ body {
 
 /* add this CSS */
 .ant-modal .ant-modal-close {
-  margin-top: 24px !important;
-  margin-right: 24px !important;
-  border-radius: '50%';
+  margin-top: 13px !important;
+  margin-right: 18px !important;
   z-index: 2;
 }
 

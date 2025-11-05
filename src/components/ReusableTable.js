@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { Table, Button, Modal, Form, Input, Space, message, Popconfirm, Typography, Row, Col } from 'antd';
-import { PlusOutlined, SearchOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { PlusOutlined, SearchOutlined, EditOutlined, DeleteOutlined, CloseOutlined } from '@ant-design/icons';
 
 const { Search } = Input;
 const { Title } = Typography;
@@ -109,6 +109,7 @@ const ReusableTable = ({ columns, data, onAdd, onEdit, onDelete, title, addButto
         open={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
+        maskClosable={false}
         width={500}
         style={{
           padding: '24px',
@@ -135,20 +136,9 @@ const ReusableTable = ({ columns, data, onAdd, onEdit, onDelete, title, addButto
             style={{
               fontSize: '20px',
               color: 'white',
-              cursor: 'pointer',
-              position: 'absolute',
-              right: '0px',
-              top: '0px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '32px',
-              height: '32px',
-              borderRadius: '50%',
-              backgroundColor: 'rgba(0, 0, 0, 0.1)',
             }}
           >
-            ✖
+            <CloseOutlined />
           </span>
         }
       >
