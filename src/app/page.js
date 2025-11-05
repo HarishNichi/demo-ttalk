@@ -1,8 +1,13 @@
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
 export default function Home() {
-  return (
-    <div style={{ textAlign: 'center', padding: '50px' }}>
-      <h1>Welcome to Demo TTalk</h1>
-      <p>Your application is ready!</p>
-    </div>
-  );
+  const router = useRouter();
+
+  useEffect(() => {
+    router.replace('/login');
+  }, [router]);
+
+  return null;
 }
+
