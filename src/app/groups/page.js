@@ -185,7 +185,7 @@ const GroupsPage = () => {
               Organize your contacts into groups for better management
             </Text>
           </Col>
-          <Col xs={24} md={8}>
+          <Col xs={24} md={4}>
             <Card
               style={{
                 background: 'rgba(255,255,255,0.1)',
@@ -198,7 +198,22 @@ const GroupsPage = () => {
                 title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>Total Groups</span>}
                 value={groups.length}
                 valueStyle={{ color: 'white', fontSize: '24px', fontWeight: 600 }}
-                prefix={<TeamOutlined style={{ color: 'white' }} />}
+              />
+            </Card>
+          </Col>
+          <Col xs={24} md={4}>
+            <Card
+              style={{
+                background: 'rgba(255,255,255,0.1)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: 12,
+              }}
+            >
+              <Statistic
+                title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>Total Contacts</span>}
+                value={contacts.length}
+                valueStyle={{ color: 'white', fontSize: '24px', fontWeight: 600 }}
               />
             </Card>
           </Col>

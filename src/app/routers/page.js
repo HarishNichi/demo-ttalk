@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import ReusableTable from '@/components/ReusableTable';
 import { ROUTER_NAMES } from '@/constants/routers';
+import { Row, Col, Card, Statistic, Typography } from 'antd';
+import { WifiOutlined } from '@ant-design/icons';
 
 const initialRouters = [
   { id: 1, name: 'Main Router', ip: '192.168.1.1' },
@@ -30,16 +32,70 @@ const RoutersPage = () => {
   };
 
   return (
-    <div style={{ padding: '32px', textAlign: 'left' }}>
-      <h1 style={{ marginBottom: 24 }}>Routers</h1>
-      <ReusableTable
-        columns={columns}
-        data={routerData}
-        showAdd={false}
-        showEdit={false}
-        showDelete={false}
-        showSearch={false}
-      />
+    <div style={{ padding: '24px 0' }}>
+      <div
+        style={{
+          background: 'linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)',
+          borderRadius: 16,
+          padding: '32px',
+          marginBottom: '24px',
+          color: 'white',
+          boxShadow: '0 8px 32px rgba(79, 70, 229, 0.3)',
+        }}
+      >
+        <Row gutter={[24, 24]} align="middle">
+          <Col xs={24} md={16}>
+            <Typography.Title
+              level={1}
+              style={{
+                color: 'white',
+                margin: 0,
+                fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
+                fontWeight: 700,
+              }}
+            >
+              Router Management
+            </Typography.Title>
+            <Typography.Text
+              style={{
+                color: 'rgba(255,255,255,0.9)',
+                fontSize: '16px',
+                display: 'block',
+                marginTop: '8px',
+              }}
+            >
+              Manage your routers efficiently with our comprehensive router management system
+            </Typography.Text>
+          </Col>
+          <Col xs={24} md={8}>
+            <Card
+              style={{
+                background: 'rgba(255,255,255,0.1)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: 12,
+              }}
+            >
+              <Statistic
+                title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>Total Routers</span>}
+                value={routerData.length}
+                prefix={<WifiOutlined style={{ color: 'white', fontSize: 20 }} />}
+                valueStyle={{ color: 'white', fontSize: '24px', fontWeight: 600 }}
+              />
+            </Card>
+          </Col>
+        </Row>
+      </div>
+      <div style={{ marginTop: 24 }}>
+        <ReusableTable
+          columns={columns}
+          data={routerData}
+          showAdd={false}
+          showEdit={false}
+          showDelete={false}
+          showSearch={false}
+        />
+      </div>
     </div>
   );
 };
