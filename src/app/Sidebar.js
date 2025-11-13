@@ -14,6 +14,9 @@ import {
 } from '@ant-design/icons';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
+import i18n from './i18nClient';
+import { GlobalOutlined } from '@ant-design/icons';
 
 // Create a context for mobile menu state
 import { createContext, useContext } from 'react';
@@ -46,6 +49,7 @@ const Sidebar = () => {
   const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+  const { t } = useTranslation();
 
   // Handle responsive behavior
   useEffect(() => {
@@ -78,25 +82,25 @@ const Sidebar = () => {
     {
       key: '/contacts',
       icon: <UserOutlined />,
-      label: 'Contacts',
+      label: t('sidebar.contacts'),
       onClick: () => isMobile && setMobileOpen(false),
     },
     {
       key: '/groups',
       icon: <TeamOutlined />,
-      label: 'Groups',
+      label: t('sidebar.groups'),
       onClick: () => isMobile && setMobileOpen(false),
     },
     {
       key: '/routers',
       icon: <WifiOutlined />,
-      label: 'Routers',
+      label: t('sidebar.routers'),
       onClick: () => isMobile && setMobileOpen(false),
     },
     {
       key: '/call-management',
       icon: <PhoneOutlined />,
-      label: 'Call Management',
+      label: t('sidebar.call-management'),
       onClick: () => isMobile && setMobileOpen(false),
     },
   ];
@@ -271,7 +275,20 @@ export const AppHeader = () => {
   const pathname = usePathname();
   const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
-  
+  const { t } = useTranslation();
+  const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setCurrentLanguage(i18n.language);
+  }, [i18n.language]);
+
+  const handleLanguageChange = () => {
+    const newLanguage = currentLanguage === 'en' ? 'ja' : 'en';
+    i18n.changeLanguage(newLanguage);
+    setCurrentLanguage(newLanguage);
+  };
+
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -321,41 +338,43 @@ export const AppHeader = () => {
           fontWeight: 600,
           color: '#1a1a1a'
         }}>
-          {pathname === '/contacts' && 'Contacts'}
-          {pathname === '/groups' && 'Groups'}
-          {pathname === '/routers' && 'Routers'}
-           {pathname === '/call-management' && 'Call Management'}
+          {t(`sidebar.${pathname.substring(1)}`)}
         </h1>
       </div>
 
       {/* User Profile */}
-      <Dropdown
-        menu={{ items: userMenuItems }}
-        placement="bottomRight"
-        arrow
-      >
-        <div style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          cursor: 'pointer',
-          padding: '8px 12px',
-          borderRadius: 8,
-          transition: 'background-color 0.3s ease'
-        }}
-        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#f5f5f5'}
-        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+      <Space size="middle">
+        <Button type="text" icon={<GlobalOutlined />} onClick={handleLanguageChange}>
+          {currentLanguage.toUpperCase()}
+        </Button>
+        <Dropdown
+          menu={{ items: userMenuItems }}
+          placement="bottomRight"
+          arrow
         >
-          <Space>
-            <Avatar
-              style={{ backgroundColor: '#667eea' }}
-              icon={<UserOutlined />}
-              size="small"
-            />
-            <span style={{ fontWeight: 500 }}>Admin</span>
-            <DownOutlined style={{ fontSize: '12px' }} />
-          </Space>
-        </div>
-      </Dropdown>
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            cursor: 'pointer',
+            padding: '8px 12px',
+            borderRadius: 8,
+            transition: 'background-color 0.3s ease'
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#f5f5f5'}
+          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+          >
+            <Space>
+              <Avatar
+                style={{ backgroundColor: '#667eea' }}
+                icon={<UserOutlined />}
+                size="small"
+              />
+              <span style={{ fontWeight: 500 }}>Admin</span>
+              <DownOutlined style={{ fontSize: '12px' }} />
+            </Space>
+          </div>
+        </Dropdown>
+      </Space>
     </div>
   );
 };

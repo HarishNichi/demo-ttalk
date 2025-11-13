@@ -6,6 +6,7 @@ import { ContactServices } from '@/services/contactsService';
 import { GroupServices } from '@/services/groupsService';
 import { CallManagementServices } from '@/services/callManagementService';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -21,6 +22,7 @@ const CallManagementPage = () => {
   const [totalContactsWithFcm, setTotalContactsWithFcm] = useState(0);
   const [totalGroups, setTotalGroups] = useState(0);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
 
   const loadContacts = () => {
     ContactServices.contactList((response) => {
@@ -95,7 +97,7 @@ const CallManagementPage = () => {
 
     CallManagementServices.initiateCall(payload, (response) => {
       if (response.data.success) {
-        toast.success('Call initiated successfully!',{position:'top-right'});
+        toast.success(t('callManagement.callInitiatedSuccess'),{position:'top-right'});
       }
     })
 
@@ -156,7 +158,7 @@ const CallManagementPage = () => {
                 fontWeight: 700,
               }}
             >
-              Call Management
+              {t('callManagement.callManagement')}
             </Title>
             <Text
               style={{
@@ -166,7 +168,7 @@ const CallManagementPage = () => {
                 marginTop: '8px',
               }}
             >
-              Manage voice calls between contacts and groups
+              {t('callManagement.callManagementDescription')}
             </Text>
           </Col>
           <Col xs={24} md={8}>
@@ -181,7 +183,7 @@ const CallManagementPage = () => {
                   }}
                 >
                   <Statistic
-                    title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>FCM Contacts </span>}
+                    title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>{t('callManagement.fcmContacts')}</span>}
                     value={totalContactsWithFcm}
                     valueStyle={{ color: 'white', fontSize: '24px', fontWeight: 600 }}
                     prefix={<UserOutlined style={{ color: 'white' }} />}
@@ -198,7 +200,7 @@ const CallManagementPage = () => {
                   }}
                 >
                   <Statistic
-                    title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>Total Groups</span>}
+                    title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>{t('callManagement.totalGroups')}</span>}
                     value={totalGroups}
                     valueStyle={{ color: 'white', fontSize: '24px', fontWeight: 600 }}
                     prefix={<UserOutlined style={{ color: 'white' }} />}
@@ -229,10 +231,10 @@ const CallManagementPage = () => {
             style={{ marginBottom: '24px' }}
           >
             <Radio.Button value="private_call" style={{ textAlign: 'center' }}>
-              <UserOutlined /> Contact Call Management
+              <UserOutlined /> {t('callManagement.contactCallManagement')}
             </Radio.Button>
             <Radio.Button value="group_call" style={{ textAlign: 'center' }}>
-              <TeamOutlined /> Group Call Management
+              <TeamOutlined /> {t('callManagement.groupCallManagement')}
             </Radio.Button>
           </Radio.Group>
         </div>
@@ -240,11 +242,11 @@ const CallManagementPage = () => {
         {callType === 'group_call' && (
           <div style={{ marginBottom: '24px' }}>
             <Text strong style={{ display: 'block', marginBottom: '8px' }}>
-              Select Group:
+              {t('callManagement.selectGroup')}:
             </Text>
             <Select
               style={{ width: '100%', maxWidth: '400px' }}
-              placeholder="Choose a group"
+              placeholder={t('callManagement.chooseGroup')}
               value={selectedGroup}
               onChange={(value) => {
                 setSelectedGroup(value);
@@ -267,14 +269,14 @@ const CallManagementPage = () => {
               title={
                 <Space>
                   <UserOutlined />
-                  <Text strong>Sender</Text>
+                  <Text strong>{t('callManagement.sender')}</Text>
                 </Space>
               }
               style={{ height: '100%' }}
             >
               <Select
                 style={{ width: '100%' }}
-                placeholder="Select sender"
+                placeholder={t('callManagement.selectSender')}
                 value={senderContact}
                 onChange={setSenderContact}
                 disabled={callType === 'group_call' && !selectedGroup}
@@ -298,14 +300,14 @@ const CallManagementPage = () => {
               title={
                 <Space>
                   <UserOutlined />
-                  <Text strong>Receiver</Text>
+                  <Text strong>{t('callManagement.receiver')}</Text>
                 </Space>
               }
               style={{ height: '100%' }}
             >
               <Select
                 style={{ width: '100%' }}
-                placeholder="Select receiver"
+                placeholder={t('callManagement.selectReceiver')}
                 value={receiverContact}
                 onChange={setReceiverContact}
                 disabled={!senderContact || (callType === 'group_call' && !selectedGroup)}
@@ -339,7 +341,7 @@ const CallManagementPage = () => {
               boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
             }}
           >
-            {callType === 'private_call' ? 'Initiate Call' : 'Start Group Call'}
+            {callType === 'private_call' ? t('callManagement.initiateCall') : t('callManagement.startGroupCall')}
           </Button>
         </div>
       </Card>

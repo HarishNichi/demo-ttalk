@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Form, Input, Button, Card, Typography, Checkbox, Row, Col, message } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 
 const { Title, Text } = Typography;
 
@@ -10,6 +11,7 @@ const LoginPage = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
+  const { t } = useTranslation();
 
   const onFinish = async (values) => {
     setLoading(true);
@@ -17,10 +19,10 @@ const LoginPage = () => {
     // Simulate API call
     setTimeout(() => {
       if (values.username === 'admin' && values.password === 'password') {
-        message.success('Login successful!');
+        message.success(t('login.success'));
         router.push('/contacts');
       } else {
-        message.error('Invalid credentials. Please try again.');
+        message.error(t('login.invalidCredentials'));
         setLoading(false);
       }
     }, 1500);
@@ -56,14 +58,14 @@ const LoginPage = () => {
               marginBottom: 16,
               fontWeight: 700
             }}>
-              Admin Panel
+              {t('login.adminPanel')}
             </Title>
             <Text style={{ 
               color: 'rgba(255,255,255,0.9)',
               fontSize: 'clamp(1rem, 2vw, 1.25rem)',
               lineHeight: 1.6
             }}>
-              Manage your contacts, groups, and routers with our intuitive admin dashboard
+              {t('login.adminPanelDescription')}
             </Text>
           </div>
           
@@ -81,7 +83,7 @@ const LoginPage = () => {
               backdropFilter: 'blur(10px)',
               border: '1px solid rgba(255,255,255,0.2)'
             }}>
-              <Text style={{ color: 'white', fontSize: 14 }}>📞 Contact Management</Text>
+              <Text style={{ color: 'white', fontSize: 14 }}>{t('login.contactManagement')}</Text>
             </div>
             <div style={{
               background: 'rgba(255,255,255,0.1)',
@@ -90,7 +92,7 @@ const LoginPage = () => {
               backdropFilter: 'blur(10px)',
               border: '1px solid rgba(255,255,255,0.2)'
             }}>
-              <Text style={{ color: 'white', fontSize: 14 }}>👥 Group Organization</Text>
+              <Text style={{ color: 'white', fontSize: 14 }}>{t('login.groupOrganization')}</Text>
             </div>
             <div style={{
               background: 'rgba(255,255,255,0.1)',
@@ -99,7 +101,7 @@ const LoginPage = () => {
               backdropFilter: 'blur(10px)',
               border: '1px solid rgba(255,255,255,0.2)'
             }}>
-              <Text style={{ color: 'white', fontSize: 14 }}>🌐 Router Management</Text>
+              <Text style={{ color: 'white', fontSize: 14 }}>{t('login.routerManagement')}</Text>
             </div>
           </div>
         </Col>
@@ -125,10 +127,10 @@ const LoginPage = () => {
                   marginBottom: 8,
                   fontWeight: 700
                 }}>
-                  Welcome Back
+                  {t('login.welcomeBack')}
                 </Title>
                 <Text type="secondary" style={{ fontSize: 16 }}>
-                  Please login to your account
+                  {t('login.pleaseLogin')}
                 </Text>
               </div>
 
@@ -141,34 +143,34 @@ const LoginPage = () => {
                 size="large"
               >
                 <Form.Item
-                  label="Username"
+                  label={t('login.username')}
                   name="username"
                   rules={[{ 
                     required: true, 
-                    message: 'Please input your username!' 
+                    message: t('login.usernameRequired')
                   }]}
                 >
                   <Input 
-                    placeholder="Enter your username"
+                    placeholder={t('login.enterUsername')}
                     prefix={<UserOutlined style={{ color: '#ccc' }} />}
                   />
                 </Form.Item>
 
                 <Form.Item
-                  label="Password"
+                  label={t('login.password')}
                   name="password"
                   rules={[{ 
                     required: true, 
-                    message: 'Please input your password!' 
+                    message: t('login.passwordRequired')
                   }]}
                 >
                   <Input.Password 
-                    placeholder="Enter your password"
+                    placeholder={t('login.enterPassword')}
                   />
                 </Form.Item>
 
                 <Form.Item>
-                  <Checkbox>Remember me</Checkbox>
+                  <Checkbox>{t('login.rememberMe')}</Checkbox>
                 </Form.Item>
 
                 <Form.Item style={{ marginBottom: 8 }}>
@@ -184,13 +186,13 @@ const LoginPage = () => {
                       fontWeight: 600
                     }}
                   >
-                    {loading ? 'Logging in...' : 'Login'}
+                    {loading ? t('login.loggingIn') : t('login.loginButton')}
                   </Button>
                 </Form.Item>
 
                 <div style={{ textAlign: 'center', marginTop: 16 }}>
                   <Text type="secondary" style={{ fontSize: 14 }}>
-                    Demo credentials: admin / password
+                    {t('login.demoCredentials')}
                   </Text>
                 </div>
               </Form>

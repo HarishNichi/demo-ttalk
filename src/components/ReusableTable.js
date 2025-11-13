@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Table, Button, Modal, Form, Input, Space, message, Popconfirm, Typography, Row, Col } from 'antd';
 import { PlusOutlined, SearchOutlined, EditOutlined, DeleteOutlined, CloseOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 const { Search } = Input;
 const { Title } = Typography;
@@ -11,6 +12,7 @@ const ReusableTable = ({ columns, data, onAdd, onEdit, onDelete, title, addButto
   const [editingRecord, setEditingRecord] = useState(null);
   const [form] = Form.useForm();
   const [searchText, setSearchText] = useState('');
+  const { t } = useTranslation();
 
   const showModal = (record) => {
     setEditingRecord(record);
@@ -42,12 +44,12 @@ const ReusableTable = ({ columns, data, onAdd, onEdit, onDelete, title, addButto
   const tableColumns = [
     ...columns,
     showEdit ? {
-      title: 'Action',
+      title: t('action'),
       key: 'action',
       render: (_, record) => (
         <span>
-          {showEdit && <Button type="link" onClick={() => showModal(record)}>Edit</Button>}
-          {showDelete && <Popconfirm title="Are you sure?" onConfirm={() => handleDelete(record)}><Button type="link" danger>Delete</Button></Popconfirm>}
+          {showEdit && <Button type="link" onClick={() => showModal(record)}>{t('edit')}</Button>}
+          {showDelete && <Popconfirm title={t('confirmDeletion')} onConfirm={() => handleDelete(record)}><Button type="link" danger>{t('delete')}</Button></Popconfirm>}
         </span>
       ),
     } : null,
@@ -70,7 +72,7 @@ const ReusableTable = ({ columns, data, onAdd, onEdit, onDelete, title, addButto
             <Col flex="auto">
               {showSearch && (
                 <Search
-                  placeholder={searchPlaceholder || 'Search...'}
+                  placeholder={searchPlaceholder || t('searchPlaceholder')}
                   allowClear
                   onSearch={setSearchText}
                   style={{ width: '100%' }}
@@ -78,7 +80,7 @@ const ReusableTable = ({ columns, data, onAdd, onEdit, onDelete, title, addButto
               )}
             </Col>
             <Col>
-              {showAdd && <Button type="primary" icon={<PlusOutlined />} onClick={() => showModal(null)}>{addButtonText || 'Add'}</Button>}
+              {showAdd && <Button type="primary" icon={<PlusOutlined />} onClick={() => showModal(null)}>{addButtonText || t('add')}</Button>}
             </Col>
           </Row>
         </Col>
@@ -103,7 +105,7 @@ const ReusableTable = ({ columns, data, onAdd, onEdit, onDelete, title, addButto
             color: 'white',
             textAlign: 'center',
           }}>
-            {editingRecord ? 'Edit Record' : 'Add Record'}
+            {editingRecord ? t('editRecord') : t('addRecord')}
           </div>
         }
         open={isModalVisible}
@@ -115,7 +117,7 @@ const ReusableTable = ({ columns, data, onAdd, onEdit, onDelete, title, addButto
           padding: '24px',
           textAlign: 'left', // Change modal content alignment to left
         }}
-        okText={<span style={{ fontWeight: 'bold', color: 'white' }}>OK</span>}
+        okText={<span style={{ fontWeight: 'bold', color: 'white' }}>{t('ok')}</span>}
         okButtonProps={{
           style: {
             backgroundColor: '#4CAF50',
@@ -124,7 +126,7 @@ const ReusableTable = ({ columns, data, onAdd, onEdit, onDelete, title, addButto
             width: '100px',
           },
         }}
-        cancelText={<span style={{ fontWeight: 'bold', color: '#595959' }}>Cancel</span>}
+        cancelText={<span style={{ fontWeight: 'bold', color: '#595959' }}>{t('cancel')}</span>}
         cancelButtonProps={{
           style: {
             borderRadius: '8px',
@@ -149,12 +151,12 @@ const ReusableTable = ({ columns, data, onAdd, onEdit, onDelete, title, addButto
                 key={field.name}
                 name={field.name}
                 label={<span style={{ textAlign: 'left', display: 'block' }}>{field.label}</span>}
-                rules={field.rules || [{ required: true, message: `Please input ${field.label}!` }]}
+                rules={field.rules || [{ required: true, message: t('pleaseInput', { field: field.label }) }]}
                 style={{ textAlign: 'left' }}
                 validateStatus={form.getFieldError(field.name).length ? 'error' : ''}
                 help={form.getFieldError(field.name).length ? <span style={{ textAlign: 'left', display: 'block' }}>{form.getFieldError(field.name)[0]}</span> : null}
               >
-                {field.input || <Input placeholder={`Enter ${field.label.toLowerCase()}`} style={{ textAlign: 'left' }} />}
+                {field.input || <Input placeholder={t('enterField', { field: field.label.toLowerCase() })} style={{ textAlign: 'left' }} />}
               </Form.Item>
             ))
           ) : (
@@ -163,7 +165,7 @@ const ReusableTable = ({ columns, data, onAdd, onEdit, onDelete, title, addButto
                 key={col.dataIndex}
                 name={col.dataIndex}
                 label={<span style={{ textAlign: 'left', display: 'block' }}>{col.title}</span>}
-                rules={[{ required: true, message: `Please input ${col.title}!` }]}
+                rules={[{ required: true, message: t('pleaseInput', { field: col.title }) }]}
                 style={{ textAlign: 'left' }}
                 validateStatus={form.getFieldError(col.dataIndex).length ? 'error' : ''}
                 help={form.getFieldError(col.dataIndex).length ? <span style={{ textAlign: 'left', display: 'block' }}>{form.getFieldError(col.dataIndex)[0]}</span> : null}

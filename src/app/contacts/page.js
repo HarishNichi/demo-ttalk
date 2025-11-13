@@ -6,27 +6,29 @@ import ReusableTable from '@/components/ReusableTable';
 import { ContactServices } from '@/services/contactsService';
 import { Modal } from 'antd';
 import { ROUTER_NAMES } from '@/constants/routers';
+import { useTranslation } from 'react-i18next';
 
 const { Title, Text } = Typography;
 
 const ContactsPage = () => {
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
 
   const formFields = [
     {
       name: 'name',
-      label: 'Name',
-      rules: [{ required: true, message: 'Please enter the contact name!' }],
-      input: <Input placeholder="Enter contact name" />,
+      label: t('contacts.name'),
+      rules: [{ required: true, message: t('contacts.nameRequired') }],
+      input: <Input placeholder={t('contacts.enterContactName')} />,
     },
     {
       name: 'vp_route',
-      label: 'Route',
-      rules: [{ required: true, message: 'Please select route!' }],
+      label: t('contacts.route'),
+      rules: [{ required: true, message: t('contacts.routeRequired') }],
       input: (
         <Select
-          placeholder="Select route"
+          placeholder={t('contacts.selectRoute')}
           style={{ width: '100%' }}
           options={ROUTER_NAMES.map((name) => ({ value: name, label: name }))}
         />
@@ -70,13 +72,13 @@ const ContactsPage = () => {
 
   const handleDelete = (recordToDelete) => {
     Modal.confirm({
-      title: <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#4A4A4A' }}>Confirm Deletion</div>,
+      title: <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#4A4A4A' }}>{t('contacts.confirmDeletion')}</div>,
       content: (
         <div style={{ fontSize: '16px', color: '#6B6B6B' }}>
-          Are you sure you want to delete the contact <strong>{recordToDelete.name}</strong>?
+          {t('contacts.deleteContactConfirmation', { contactName: recordToDelete.name })}
         </div>
       ),
-      okText: <span style={{ fontWeight: 'bold', color: 'white' }}>Yes, Delete</span>,
+      okText: <span style={{ fontWeight: 'bold', color: 'white' }}>{t('contacts.yesDelete')}</span>,
       okButtonProps: {
         style: {
           backgroundColor: '#FF4D4F',
@@ -84,7 +86,7 @@ const ContactsPage = () => {
           borderRadius: '8px',
         },
       },
-      cancelText: <span style={{ fontWeight: 'bold', color: '#595959' }}>Cancel</span>,
+      cancelText: <span style={{ fontWeight: 'bold', color: '#595959' }}>{t('contacts.cancel')}</span>,
       cancelButtonProps: {
         style: {
           borderRadius: '8px',
@@ -110,14 +112,14 @@ const ContactsPage = () => {
 
   const columns = [
     {
-      title: 'ID',
+      title: t('contacts.id'),
       dataIndex: 'id',
       key: 'id',
       width: 80,
       sorter: (a, b) => a.id - b.id,
     },
     {
-      title: 'Name',
+      title: t('contacts.name'),
       dataIndex: 'name',
       key: 'name',
       sorter: (a, b) => a.name.localeCompare(b.name),
@@ -129,13 +131,13 @@ const ContactsPage = () => {
       ),
     },
     {
-      title: 'Route',
+      title: t('contacts.route'),
       dataIndex: 'vp_route',
       key: 'vp_route',
       sorter: (a, b) => a.vp_route.localeCompare(b.vp_route),
     },
       {
-       title: 'FCM Token',
+       title: t('contacts.fcmToken'),
        dataIndex: 'fcm_token',
        key: 'fcm_token',
        render: (token) => (
@@ -146,14 +148,14 @@ const ContactsPage = () => {
        sorter: (a, b) => (a.fcm_token || '').localeCompare(b.fcm_token || ''),
      },
     {
-      title: 'Created At',
+      title: t('contacts.createdAt'),
       dataIndex: 'created_at',
       key: 'created_at',
       sorter: (a, b) => new Date(a.created_at) - new Date(b.created_at),
       render: (date) => new Date(date).toLocaleString(),
     },
     {
-      title: 'Updated At',
+      title: t('contacts.updatedAt'),
       dataIndex: 'updated_at',
       key: 'updated_at',
       sorter: (a, b) => new Date(a.updated_at) - new Date(b.updated_at),
@@ -163,7 +165,7 @@ const ContactsPage = () => {
   ];
 
   if (loading) {
-    return <div style={{ padding: '24px', textAlign: 'center' }}>Loading contacts...</div>;
+    return <div style={{ padding: '24px', textAlign: 'center' }}>{t('contacts.loadingContacts')}</div>;
   }
 
   return (
@@ -189,7 +191,7 @@ const ContactsPage = () => {
                 fontWeight: 700,
               }}
             >
-              Contact Management
+              {t('contacts.contactManagement')}
             </Title>
             <Text
               style={{
@@ -199,7 +201,7 @@ const ContactsPage = () => {
                 marginTop: '8px',
               }}
             >
-              Manage your contacts efficiently with our comprehensive contact management system
+              {t('contacts.contactManagementDescription')}
             </Text>
           </Col>
           <Col xs={24} md={8}>
@@ -212,7 +214,7 @@ const ContactsPage = () => {
               }}
             >
               <Statistic
-                title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>Total Contacts</span>}
+                title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>{t('contacts.totalContacts')}</span>}
                 value={contacts.length}
                 valueStyle={{ color: 'white', fontSize: '24px', fontWeight: 600 }}
                 prefix={<UserOutlined style={{ color: 'white' }} />}
@@ -229,9 +231,9 @@ const ContactsPage = () => {
         onEdit={handleEdit}
         onDelete={handleDelete}
         showDelete={false}
-        title="Contact Directory"
-        addButtonText="Add New Contact"
-        searchPlaceholder="Search contacts by name or route..."
+        title={t('contacts.contactDirectory')}
+        addButtonText={t('contacts.addNewContact')}
+        searchPlaceholder={t('contacts.searchContactsPlaceholder')}
         formFields={formFields}
         tableStyle={{
           borderRadius: '12px',

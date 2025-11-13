@@ -4,6 +4,7 @@ import ReusableTable from '@/components/ReusableTable';
 import { ROUTER_NAMES } from '@/constants/routers';
 import { Row, Col, Card, Statistic, Typography } from 'antd';
 import { WifiOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 const initialRouters = [
   { id: 1, name: 'Main Router', ip: '192.168.1.1' },
@@ -12,10 +13,11 @@ const initialRouters = [
 
 const RoutersPage = () => {
   const [routers, setRouters] = useState(initialRouters);
+  const { t } = useTranslation();
   const routerData = ROUTER_NAMES.map((name, idx) => ({ id: idx + 1, name }));
   const columns = [
-    { title: 'ID', dataIndex: 'id', key: 'id', width: 80 },
-    { title: 'Name', dataIndex: 'name', key: 'name' },
+    { title: t('routers.id'), dataIndex: 'id', key: 'id', width: 80 },
+    { title: t('routers.name'), dataIndex: 'name', key: 'name' },
   ];
 
   const handleAdd = (newRecord) => {
@@ -54,7 +56,7 @@ const RoutersPage = () => {
                 fontWeight: 700,
               }}
             >
-              Router Management
+              {t('routers.routerManagement')}
             </Typography.Title>
             <Typography.Text
               style={{
@@ -64,7 +66,7 @@ const RoutersPage = () => {
                 marginTop: '8px',
               }}
             >
-              Manage your routers efficiently with our comprehensive router management system
+              {t('routers.routerManagementDescription')}
             </Typography.Text>
           </Col>
           <Col xs={24} md={8}>
@@ -77,7 +79,7 @@ const RoutersPage = () => {
               }}
             >
               <Statistic
-                title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>Total Routers</span>}
+                title={<span style={{ color: 'rgba(255,255,255,0.8)' }}>{t('routers.totalRouters')}</span>}
                 value={routerData.length}
                 prefix={<WifiOutlined style={{ color: 'white', fontSize: 20 }} />}
                 valueStyle={{ color: 'white', fontSize: '24px', fontWeight: 600 }}
@@ -94,6 +96,9 @@ const RoutersPage = () => {
           showEdit={false}
           showDelete={false}
           showSearch={false}
+          title={t('routers.routerDirectory')}
+          addButtonText={t('routers.addNewRouter')}
+          searchPlaceholder={t('routers.searchRoutersPlaceholder')}
         />
       </div>
     </div>

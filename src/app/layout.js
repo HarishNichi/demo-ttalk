@@ -8,6 +8,9 @@ import Sidebar, { AppHeader, SidebarProvider, useSidebar } from "./Sidebar";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
+import { useParams } from "next/navigation";
+import i18n from "./i18nClient";
+import { I18nextProvider } from "react-i18next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,6 +51,7 @@ export default function RootLayout({ children }) {
   const pathname = usePathname();
   const [isLoginPage, setIsLoginPage] = useState(false);
   const [isStylesLoaded, setIsStylesLoaded] = useState(false);
+  const { lang } = useParams();
 
   useEffect(() => {
     setIsLoginPage(pathname === '/login');
@@ -92,7 +96,7 @@ export default function RootLayout({ children }) {
   }, []);
 
   return (
-    <html lang="en">
+    <html lang={lang}>
       <head>
         {/* Preload critical styles to prevent FOUC */}
         <style dangerouslySetInnerHTML={{
@@ -184,17 +188,19 @@ export default function RootLayout({ children }) {
             </div>
           ) : (
             <SidebarProvider>
-              <div style={{ 
-                display: 'flex', 
-                minHeight: '100vh',
-                background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)'
-              }}>
-                <Sidebar />
-                <MainContent>
-                  <Toaster/>
-                  {children}
+              <I18nextProvider i18n={i18n}>
+                <div style={{ 
+                  display: 'flex', 
+                  minHeight: '100vh',
+                  background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)'
+                }}>
+                  <Sidebar />
+                  <MainContent>
+                    <Toaster/>
+                    {children}
                   </MainContent>
-              </div>
+                </div>
+              </I18nextProvider>
             </SidebarProvider>
           )}
         </AntdRegistry>
