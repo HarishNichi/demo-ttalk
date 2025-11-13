@@ -383,3 +383,76 @@ body {
     transform: translateY(0);
   }
 }
+.ant-table {
+  font-family: inherit !important;
+}
+
+.ant-tabs {
+  font-family: inherit !important;
+}
+.ant-modal-root {
+  font-family: inherit !important;
+}
+
+.ant-picker {
+  font-family: inherit !important;
+}
+.ant-table-wrapper {
+  font-family: inherit !important;
+}
+.ant-spin-nested-loading {
+  font-family: inherit !important;
+}
+.ant-modal {
+  font-family: inherit !important;
+}
+.ant-picker {
+  font-family: inherit !important;
+}
+.ant-card {
+  font-family: inherit !important;
+}
+.ant-row {
+  font-family: inherit !important;
+}
+.ant-col {
+  font-family: inherit !important;
+}
+
+.ant-table-wrapper {
+  font-family: inherit !important;
+}
+.ant-table-container {
+  border: 1px solid #e7e7e9;
+}
+.ant-spin-nested-loading {
+  font-family: inherit !important;
+}
+.ant-table {
+  font-family: inherit !important;
+}
+
+.ant-btn {
+  font-family: inherit !important;
+}
+.ant-select-selector,
+.ant-select-dropdown,
+.ant-select-item {
+  font-family: inherit !important;
+}
+.ant-select {
+  font-family: inherit !important;
+}
+.ant-typography {
+  font-family: inherit !important;
+}
+.ant-menu {
+  font-family: inherit !important;
+}
+.ant-statistic {
+  font-family: inherit !important;
+}
+.ant-radio-button-wrapper {
+  font-family: inherit !important;
+}
+
