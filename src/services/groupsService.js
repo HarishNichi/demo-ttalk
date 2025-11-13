@@ -19,9 +19,8 @@ async function _groupList(callBackFun) {
     const res = await axiosInstance.get(`${BASE_URL}/list`);
     console.log(res?.data?.data || res?.data || []);
     callBackFun(res?.data?.data || []);
-    toast.success("Groups fetched successfully");
   } catch (error) {
-    toast.error(error?.response?.data?.message || "Failed to fetch groups");
+    toast.error(error?.response?.data?.message || "Failed to fetch groups",{position:"top-right"});
     callBackFun(false);
   }
 }
@@ -33,9 +32,9 @@ async function _groupCreate(payload, callBackFun) {
   try {
     const res = await axiosInstance.post(`${BASE_URL}/create`, payload);
     callBackFun(res?.data);
-    toast.success("Group created successfully");
+    toast.success("Group created successfully",{position:"top-right"});
   } catch (error) {
-    toast.error(error?.response?.data?.message || "Failed to create group");
+    toast.error(error?.response?.data?.message || "Failed to create group",{position:"top-right"});
     callBackFun(false);
   }
 }
@@ -48,9 +47,9 @@ async function _groupUpdate(id, payload, callBackFun) {
     const { id, created_at, updated_at, ...cleanPayload } = payload;
     const res = await axiosInstance.put(`${BASE_URL}/${id}`, cleanPayload);
     callBackFun(res?.data);
-    toast.success("Group updated successfully");
+    toast.success("Group updated successfully",{position:"top-right"});
   } catch (error) {
-    toast.error(error?.response?.data?.message || "Failed to update group");
+    toast.error(error?.response?.data?.message || "Failed to update group",{position:"top-right"});
     callBackFun(false);
   }
 }
@@ -62,9 +61,8 @@ async function _groupDelete(id, callBackFun) {
   try {
     const res = await axiosInstance.delete(`${BASE_URL}/delete/${id}`);
     callBackFun(res?.data);
-    toast.success("Group deleted successfully");
   } catch (error) {
-    toast.error(error?.response?.data?.message || "Failed to delete group");
+    toast.error(error?.response?.data?.message || "Failed to delete group",{position:"top-right"});
     callBackFun(false);
   }
 }
@@ -76,9 +74,8 @@ async function _groupDetail(id, callBackFun) {
   try {
     const res = await axiosInstance.get(`${BASE_URL}/detail/${id}`);
     callBackFun(res?.data);
-    toast.success("Group details fetched");
   } catch (error) {
-    toast.error(error?.response?.data?.message || "Failed to fetch group details");
+    toast.error(error?.response?.data?.message || "Failed to fetch group details",{position:"top-right"});
     callBackFun(false);
   }
 }

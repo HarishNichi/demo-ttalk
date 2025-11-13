@@ -7,6 +7,7 @@ import AntdRegistry from "./AntdRegistry";
 import Sidebar, { AppHeader, SidebarProvider, useSidebar } from "./Sidebar";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -189,7 +190,10 @@ export default function RootLayout({ children }) {
                 background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)'
               }}>
                 <Sidebar />
-                <MainContent>{children}</MainContent>
+                <MainContent>
+                  <Toaster/>
+                  {children}
+                  </MainContent>
               </div>
             </SidebarProvider>
           )}

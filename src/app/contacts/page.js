@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Card, Statistic, Typography, Input, Button, Space, Select } from 'antd';
+import { Row, Col, Card, Statistic, Typography, Input, Button, Space, Select, Tooltip } from 'antd';
 import { UserOutlined, TeamOutlined } from '@ant-design/icons';
 import ReusableTable from '@/components/ReusableTable';
 import { ContactServices } from '@/services/contactsService';
@@ -32,6 +32,7 @@ const ContactsPage = () => {
         />
       ),
     },
+
   ];
 
   useEffect(() => {
@@ -133,6 +134,17 @@ const ContactsPage = () => {
       key: 'vp_route',
       sorter: (a, b) => a.vp_route.localeCompare(b.vp_route),
     },
+      {
+       title: 'FCM Token',
+       dataIndex: 'fcm_token',
+       key: 'fcm_token',
+       render: (token) => (
+         <Tooltip title={token || ''}> {/* Ensure token is not null for title */}
+           {token ? `${token.substring(0, 10)}...` : 'N/A'}
+         </Tooltip>
+       ),
+       sorter: (a, b) => (a.fcm_token || '').localeCompare(b.fcm_token || ''),
+     },
     {
       title: 'Created At',
       dataIndex: 'created_at',
@@ -147,6 +159,7 @@ const ContactsPage = () => {
       sorter: (a, b) => new Date(a.updated_at) - new Date(b.updated_at),
       render: (date) => new Date(date).toLocaleString(),
     },
+   
   ];
 
   if (loading) {

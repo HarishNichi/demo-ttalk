@@ -10,6 +10,7 @@ import {
   WifiOutlined,
   LogoutOutlined,
   DownOutlined,
+  PhoneOutlined,
 } from '@ant-design/icons';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -90,6 +91,12 @@ const Sidebar = () => {
       key: '/routers',
       icon: <WifiOutlined />,
       label: 'Routers',
+      onClick: () => isMobile && setMobileOpen(false),
+    },
+    {
+      key: '/call-management',
+      icon: <PhoneOutlined />,
+      label: 'Call Management',
       onClick: () => isMobile && setMobileOpen(false),
     },
   ];
@@ -317,6 +324,7 @@ export const AppHeader = () => {
           {pathname === '/contacts' && 'Contacts'}
           {pathname === '/groups' && 'Groups'}
           {pathname === '/routers' && 'Routers'}
+           {pathname === '/call-management' && 'Call Management'}
         </h1>
       </div>
 
