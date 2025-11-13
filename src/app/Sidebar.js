@@ -276,7 +276,7 @@ export const AppHeader = () => {
   const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
   const { t } = useTranslation();
-  const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
+  const [currentLanguage, setCurrentLanguage] = useState('ja');
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect

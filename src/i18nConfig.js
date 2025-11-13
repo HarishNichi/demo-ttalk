@@ -1,6 +1,6 @@
 export const i18nConfig = {
   locales: ['en', 'ja'],
-  defaultLocale: 'en',
+  defaultLocale: 'ja',
 };
 
 export const languages = i18nConfig.locales;
