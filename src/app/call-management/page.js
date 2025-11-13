@@ -11,7 +11,7 @@ const { Title, Text } = Typography;
 const { Option } = Select;
 
 const CallManagementPage = () => {
-  const [callType, setCallType] = useState('contact'); // 'contact' or 'group'
+  const [callType, setCallType] = useState('private_call'); // 'contact' or 'group'
   const [contacts, setContacts] = useState([]);
   const [groups, setGroups] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState(null);
@@ -83,13 +83,12 @@ const CallManagementPage = () => {
     const fromUserId = senderContact; // Receiver contact ID
     const toUserIds = selectedGroup ? group_contact_ids : [receiverContact]; // Group contact IDs or single receiver ID
     const vp_route = route;  // Use the managed senderVp_Route state
-    const metadata = { callType: "voice" }; // Constant metadata as specified
 
     const payload = {
       fromUserId,
       toUserIds,
       vp_route,
-      metadata
+      callType
     };
 
     CallManagementServices.initiateCall(payload, (response) => {
@@ -108,14 +107,14 @@ const CallManagementPage = () => {
   };
 
   const contactOptions = contacts.map(contact => ({
-    label: `${contact.name} (${contact.vp_route})`, // Display name and VP route
+    label: `${contact.id} ${contact.name} (${contact.vp_route})`, // Display name and VP route
     value: contact.id, // Store the contact ID
     key: contact.id
   }));
 
   const availableSenders = contactOptions;
 
-  const availableReceivers = callType === 'contact'
+  const availableReceivers = callType === 'private_call'
     ? contactOptions.filter(option => option.value !== senderContact)
     : (selectedGroup ? groups.filter(group => group.id === selectedGroup).map(group => ({
        label: group.name, // Display group name
@@ -218,16 +217,16 @@ const CallManagementPage = () => {
             }}
             style={{ marginBottom: '24px' }}
           >
-            <Radio.Button value="contact" style={{ textAlign: 'center' }}>
+            <Radio.Button value="private_call" style={{ textAlign: 'center' }}>
               <UserOutlined /> Contact Call Management
             </Radio.Button>
-            <Radio.Button value="group" style={{ textAlign: 'center' }}>
+            <Radio.Button value="group_call" style={{ textAlign: 'center' }}>
               <TeamOutlined /> Group Call Management
             </Radio.Button>
           </Radio.Group>
         </div>
 
-        {callType === 'group' && (
+        {callType === 'group_call' && (
           <div style={{ marginBottom: '24px' }}>
             <Text strong style={{ display: 'block', marginBottom: '8px' }}>
               Select Group:
@@ -267,11 +266,11 @@ const CallManagementPage = () => {
                 placeholder="Select sender"
                 value={senderContact}
                 onChange={setSenderContact}
-                disabled={callType === 'group' && !selectedGroup}
+                disabled={callType === 'group_call' && !selectedGroup}
               >
-                {(callType === 'contact' ? contactOptions :
+                {(callType === 'private_call' ? contactOptions :
                   (selectedGroup ? getGroupMembers(selectedGroup).map(contact => ({
-                    label: `${contact.name} (${contact.vp_route})`,
+                    label: `${contact.id} ${contact.name} (${contact.vp_route})`,
                     value: contact.id,
                     key: contact.id
                   })) : [])).map(option => (
@@ -298,7 +297,7 @@ const CallManagementPage = () => {
                 placeholder="Select receiver"
                 value={receiverContact}
                 onChange={setReceiverContact}
-                disabled={!senderContact || (callType === 'group' && !selectedGroup)}
+                disabled={!senderContact || (callType === 'group_call' && !selectedGroup)}
               >
                 {availableReceivers.map(option => (
                   <Option key={option.key} value={option.value}>
@@ -329,7 +328,7 @@ const CallManagementPage = () => {
               boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
             }}
           >
-            {callType === 'contact' ? 'Initiate Call' : 'Start Group Call'}
+            {callType === 'private_call' ? 'Initiate Call' : 'Start Group Call'}
           </Button>
         </div>
       </Card>
