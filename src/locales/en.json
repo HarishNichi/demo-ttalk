@@ -98,6 +98,7 @@
     "searchRoutersPlaceholder": "Search Router by Name"
   },
   "addRecord": "Add Record",
+  "editRecord": "Edit Record",
   "ok": "OK",
   "cancel": "Cancel",
   "pleaseInput": "Please input {{field}}",

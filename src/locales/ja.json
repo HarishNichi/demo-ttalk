@@ -99,6 +99,7 @@
     "searchRoutersPlaceholder": "名前でルーターを検索"
   },
   "addRecord": "レコードを追加",
+  "editRecord": "レコードを編集",
   "ok": "OK",
   "cancel": "キャンセル",
   "pleaseInput": "{{field}}を入力してください",
