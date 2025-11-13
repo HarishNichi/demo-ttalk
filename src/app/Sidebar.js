@@ -186,7 +186,7 @@ const Sidebar = () => {
                 transition: 'all 0.3s ease',
                 flex: 1
               }}>
-                {collapsed ? 'AP' : 'Admin Panel'}
+                {collapsed ? t('shortAdminPanel') : t('adminPanel')}
               </h2>
               <Button
                 type="text"

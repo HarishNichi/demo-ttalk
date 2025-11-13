@@ -2,7 +2,8 @@
   "login": {
     "success": "ログイン成功！",
     "invalidCredentials": "認証情報が無効です。もう一度お試しください。",
-    "adminPanel": "管理パネル",
+    "adminPanel": "管理画面",
+    "shortAdminPanel": "AP",
     "adminPanelDescription": "直感的な管理ダッシュボードで連絡先、グループ、ルーターを管理します",
     "contactManagement": "📞 連絡先管理",
     "groupOrganization": "👥 グループ編成",
@@ -39,7 +40,7 @@
     "contactManagement": "連絡先管理",
     "contactManagementDescription": "包括的な連絡先管理システムで連絡先を効率的に管理します",
     "totalContacts": "合計連絡先",
-    "contactDirectory": "連絡先ディレクトリ",
+    "contactDirectory": "連絡先一覧",
     "addNewContact": "連絡先追加",
     "searchContactsPlaceholder": "検索",
     "edit": "編集"
@@ -64,7 +65,7 @@
     "groupManagement": "グループ管理",
     "groupManagementDescription": "連絡先グループを効率的に管理",
     "totalGroups": "合計グループ",
-    "groupDirectory": "グループディレクトリ",
+    "groupDirectory": "グループ一覧",
     "addNewGroup": "グループ追加",
     "searchGroupsPlaceholder": "グループ名で検索...",
     "edit": "編集",
@@ -94,7 +95,7 @@
     "routerManagement": "ルーター管理",
     "routerManagementDescription": "包括的なルーター管理システムでルーターを効率的に管理",
     "totalRouters": "合計ルーター",
-    "routerDirectory": "ルーターディレクトリ",
+    "routerDirectory": "ルーター一覧",
     "addNewRouter": "新しいルーターを追加",
     "searchRoutersPlaceholder": "名前でルーターを検索"
   },
@@ -104,6 +105,8 @@
   "cancel": "キャンセル",
   "pleaseInput": "{{field}}を入力してください",
   "enterField": "{{field}}を入力",
+  "adminPanel": "管理画面",
+  "shortAdminPanel": "管理",
   "callManagement": {
     "callManagement": "通話管理",
     "callInitiatedSuccess": "通話が正常に開始されました！",

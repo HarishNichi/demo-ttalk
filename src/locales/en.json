@@ -3,6 +3,7 @@
     "success": "Login successful!",
     "invalidCredentials": "Invalid credentials. Please try again.",
     "adminPanel": "Admin Panel",
+    "shortAdminPanel": "AP",
     "adminPanelDescription": "Manage your contacts, groups, and routers with our intuitive admin dashboard",
     "contactManagement": "📞 Contact Management",
     "groupOrganization": "👥 Group Organization",
@@ -103,6 +104,8 @@
   "cancel": "Cancel",
   "pleaseInput": "Please input {{field}}",
   "enterField": "Enter {{field}}",
+  "adminPanel": "Admin Panel",
+  "shortAdminPanel": "AP",
   "callManagement": {
     "callManagement": "Call management",
     "callInitiatedSuccess": "Call initiated successfully!",
