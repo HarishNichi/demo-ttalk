@@ -75,9 +75,11 @@ const CallManagementPage = () => {
     if (selectedGroup) {
       group_contact_ids = getGroupMembers(selectedGroup).map(contact => (contact.id))
     }
-    console.log('senderContact', senderContact);
-    console.log('receiverContact', receiverContact);
-    console.log('selectedGroup', selectedGroup);
+    // remove senderContact.id if present
+    if (senderContact && group_contact_ids.includes(senderContact)) {
+        group_contact_ids = group_contact_ids.filter(id => id !== senderContact);
+    } 
+
 
         // Extract user IDs and metadata from the selected contacts/groups
     const fromUserId = senderContact; // Receiver contact ID
@@ -103,6 +105,15 @@ const CallManagementPage = () => {
     setSelectedGroup(null); // Also reset selected group when initiating a call
     loadContacts();
     loadGroups();
+
+    // Additional logic for removing sender from group call if selected
+    if (selectedGroup) {
+      let group_contact_ids = getGroupMembers(selectedGroup).map(contact => (contact.id));
+      if (senderContact && group_contact_ids.includes(senderContact)) {
+        group_contact_ids = group_contact_ids.filter(id => id !== senderContact);
+      }
+      setToUserIds(group_contact_ids);
+    }
 
   };
 
