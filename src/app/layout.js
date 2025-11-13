@@ -1,7 +1,7 @@
 
 'use client';
 
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import AntdRegistry from "./AntdRegistry";
 import Sidebar, { AppHeader, SidebarProvider, useSidebar } from "./Sidebar";
@@ -20,6 +20,13 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const notoSansJP = Noto_Sans_JP({
+  variable: "--font-noto-sans-jp",
+  weight: ["400", "700"],
+  subsets: ["japanese"],
+  preload: true,
 });
 
 // Create a separate component for main content to use sidebar context
@@ -171,9 +178,9 @@ export default function RootLayout({ children }) {
         }} />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased ${isStylesLoaded ? 'style-loaded' : 'style-loading'}`}
+        className={`${geistSans.variable} ${geistMono.variable} ${notoSansJP.variable} antialiased ${isStylesLoaded ? 'style-loaded' : 'style-loading'}`}
         style={{
-          fontFamily: geistSans.style.fontFamily,
+          fontFamily: `${notoSansJP.style.fontFamily}, ${geistSans.style.fontFamily}`,
           background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
           minHeight: '100vh',
           overflowX: 'hidden',
