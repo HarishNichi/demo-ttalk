@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { Menu, Button, Drawer, Avatar, Dropdown, Space } from 'antd';
-import { MenuOutlined } from '@ant-design/icons';
+import { BellOutlined, MenuOutlined } from '@ant-design/icons';
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -98,9 +98,9 @@ const Sidebar = () => {
       onClick: () => isMobile && setMobileOpen(false),
     },
     {
-      key: '/call-management',
-      icon: <PhoneOutlined />,
-      label: t('sidebar.call-management'),
+      key: '/notification-management',
+      icon: <BellOutlined />,
+      label: t('sidebar.notification-management'),
       onClick: () => isMobile && setMobileOpen(false),
     },
   ];
@@ -226,7 +226,7 @@ const Sidebar = () => {
           }}>
             {/* Logo/Title */}
             <div style={{ 
-              padding: '0 24px 24px', 
+              padding: '0 24px 24px',
               textAlign: 'center',
               borderBottom: '1px solid rgba(255,255,255,0.1)',
               marginBottom: 16
@@ -234,7 +234,7 @@ const Sidebar = () => {
               <h2 style={{ 
                 color: 'white', 
                 margin: 0, 
-                fontSize: '20px',
+                fontSize: '20px', 
                 fontWeight: 600
               }}>
                 Admin Panel
@@ -332,6 +332,7 @@ export const AppHeader = () => {
             style={{ marginRight: 16, fontSize: 18 }}
           />
         )}
+          {!isMobile && (
         <h1 style={{ 
           margin: 0, 
           fontSize: '20px', 
@@ -340,7 +341,9 @@ export const AppHeader = () => {
         }}>
           {t(`sidebar.${pathname.substring(1)}`)}
         </h1>
+           )}
       </div>
+       
 
       {/* User Profile */}
       <Space size="middle">

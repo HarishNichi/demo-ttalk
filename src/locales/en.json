@@ -131,8 +131,31 @@
     "login": "Login",
     "not-found": "Page Not Found",
     "": "Home",
-    "_not-found": "Page Not Found"
+    "_not-found": "Page Not Found",
+    "notification-management": "Notification Management"
   },
   "edit": "Edit",
-  "action": "Action"
+  "action": "Action",
+  "notificationManagement": {
+    "title": "Notification Management",
+    "individualNotification": "Individual Notification",
+    "description": "Select a contact or group to send notifications.",
+    "groupNotification": "Group Notification",
+    "individualNotificationMode": "Individual Notification Mode",
+    "contactsDropdown": "Contacts",
+    "selectContact": "Select a contact",
+    "fcmTokenInput": "FCM Token",
+    "fcmTokenPlaceholder": "FCM Token will be auto-filled",
+    "vpRouteDropdown": "VP Route",
+    "vpRoutePlaceholder": "VP Route will be auto-filled",
+    "groupNotificationMode": "Group Notification Mode",
+    "groupDropdown": "Groups",
+    "selectGroup": "Select a group",
+    "voicePingRouterUrlDropdown": "Router",
+    "selectVoicePingRouterUrl": "Select Router",
+    "sendNotification": "Send Notification",
+    "totalContacts": "Total Contacts",
+    "totalGroups": "Total Groups",
+    "notificationSentSuccess": "Notification sent successfully!"
+  }
 }

@@ -132,8 +132,31 @@
     "login": "ログイン",
     "not-found": "ページが見つかりません",
     "": "ホーム",
-    "_not-found": "ページが見つかりません"
+    "_not-found": "ページが見つかりません",
+    "notification-management": "通知管理"
   },
   "edit": "編集",
-  "action": "アクション"
+  "action": "アクション",
+  "notificationManagement": {
+    "title": "通知管理",
+    "individualNotification": "個別通知",
+    "description": "個人 / グループを選択して通知情報を入力します。",
+    "groupNotification": "グループ通知",
+    "individualNotificationMode": "個別通知モード",
+    "contactsDropdown": "連絡先",
+    "selectContact": "連絡先を選択",
+    "fcmTokenInput": "FCMトークン",
+    "fcmTokenPlaceholder": "FCMトークンは自動入力されます",
+    "vpRouteDropdown": "ルートー",
+    "vpRoutePlaceholder": "ルートーは自動入力されます",
+    "groupNotificationMode": "グループ通知モード",
+    "groupDropdown": "グループ",
+    "selectGroup": "グループを選択",
+    "voicePingRouterUrlDropdown": "ルーター",
+    "selectVoicePingRouterUrl": "ルーターを選択",
+    "sendNotification": "通知を送信",
+    "totalContacts": "合計連絡先",
+    "totalGroups": "合計グループ",
+    "notificationSentSuccess": "通知が正常に送信されました！"
+  }
 }
