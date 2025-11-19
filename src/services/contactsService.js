@@ -42,7 +42,7 @@ async function _contactCreate(payload, callBackFun) {
  */
 async function _contactUpdate(id, payload, callBackFun) {
   try {
-    const { id, created_at, updated_at, ...cleanPayload } = payload;
+    const { id, created_at, updated_at,fcm_token, ...cleanPayload } = payload;
     const res = await axiosInstance.put(`${BASE_URL}/${id}`, cleanPayload);
     callBackFun(res?.data);
   } catch (error) {
